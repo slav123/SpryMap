@@ -1,0 +1,40 @@
+body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+             "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    background: #f8f8f8;
+}
+
+div.content {
+    width: 816px;
+    height : 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.content h1, h2, h3 {
+    font-weight: normal;
+    text-align: center;
+    margin: 20px;
+}
+
+div.content h1 {
+    font-size: 3em;
+    color: #2D6ABA;
+}
+
+div.content h2 {
+    font-size: 1.5em;
+}
+
+div.content h3 {
+    font-size: 1em;
+}
+
+div.content h3 a {
+    color: #1C4B8A;
+}
+
+.mappy {
+    border: 8px solid #C1D9F7;
+}
