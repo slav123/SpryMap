@@ -31,6 +31,10 @@ var map = new SpryMap({
    lockEdges: true,
    // The CSS class attached to the wrapping map div
    cssClass: ""
+   // The cursor CSS style rule to apply when the mouse hovers the map
+   hoverCursor: "auto"
+   // The cursor CSS style rule to apply when the mouse is dragged on the map
+   dragCursor: "[closed hand cursor]"
 });
 */
 function SpryMap(param) {
@@ -83,10 +87,13 @@ function SpryMap(param) {
     m.width = typeof param.width == "undefined" ? 800 : param.width;
     m.height = typeof param.height == "undefined" ? 800 : param.height;
     m.scrolling = typeof param.scrolling == "undefined" ? true : param.scrolling;
+    m.hoverCursor = param.hoverCursor || "auto";    // If you prefer, the "open hand" style is: "url(data:image/vnd.microsoft.icon;base64,AAACAAEAICACAAgACAAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAA/AAAAfwAAAP+AAAH/gAAB/8AAA//AAAd/wAAGf+AAAH9gAADbYAAA2yAAAZsAAAGbAAAAGAAAAAAAAA//////////////////////////////////////////////////////////////////////////////////////gH///4B///8Af//+AD///AA///wAH//4AB//8AAf//AAD//5AA///gAP//4AD//8AF///AB///5A////5///8=), default"
+    m.dragCursor = param.dragCursor || "url(data:image/vnd.microsoft.icon;base64,AAACAAEAICACAAcABQAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAA/AAAAfwAAAP+AAAH/gAAB/8AAAH/AAAB/wAAA/0AAANsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////////////////////////////////////////////////////////////gH///4B///8Af//+AD///AA///wAH//+AB///wAf//4AH//+AD///yT/////////////////////////////8=), default";
     m.scrollTime = typeof param.scrollTime == "undefined" ? 300 : param.scrollTime;
     m.lockEdges = typeof param.lockEdges == "undefined" ? true : param.lockEdges;
     m.viewingBox = document.createElement("div");
-    if(typeof param.cssClass != "undefined") m.viewingBox.className = param.cssClass;
+    if (typeof param.cssClass != "undefined") m.viewingBox.className = param.cssClass;
+    m.viewingBox.style.cursor = m.hoverCursor;
     m.mousePosition = new Coordinate;
     m.mouseLocations = [];
     m.velocity = new Coordinate;
@@ -154,7 +161,7 @@ function SpryMap(param) {
      * mousedown event handler
      */
     AddListener(m.viewingBox, "mousedown", function (e) {
-        m.viewingBox.style.cursor = "url(data:image/x-win-bitmap;base64,AAACAAEAICACAAcABQAwAQAAFgAAACgAAAAgAAAAQAAAAAEAAQAAAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAA/AAAAfwAAAP+AAAH/gAAB/8AAAH/AAAB/wAAA/0AAANsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////////////////////////////////////////////////////////////gH///4B///8Af//+AD///AA///wAH//+AB///wAf//4AH//+AD///yT/////////////////////////////8=), default";
+        m.viewingBox.style.cursor = m.dragCursor;
 
         // Save the current mouse position so we can later find how far the
         // mouse has moved in order to scroll that distance
@@ -205,6 +212,6 @@ function SpryMap(param) {
             }
         }
         
-        m.viewingBox.style.cursor = "auto";
+        m.viewingBox.style.cursor = m.hoverCursor;
     });
 };
