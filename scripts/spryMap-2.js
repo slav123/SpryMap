@@ -38,6 +38,10 @@ var map = new SpryMap({
 });
 */
 function SpryMap(param) {
+    // onmousedown x y
+    var sx = 0;
+    var sy = 0;
+
     /**
      * Name:        MoveMap()
      * Description: Function that moves the map to a given X and Y offset.
@@ -114,11 +118,13 @@ function SpryMap(param) {
      * Description: Function called every time that the mouse moves
      */
     var MouseMove = function (b) {
-        var e = b.clientX - m.mousePosition.x + parseInt(m.map.style.left),
-            d = b.clientY - m.mousePosition.y + parseInt(m.map.style.top);
+        clientX = b.clientX||b.touches[0].clientX;
+        clientY = b.clientY||b.touches[0].clientY;
+        var e = clientX - m.mousePosition.x + parseInt(m.map.style.left),
+            d = clientY - m.mousePosition.y + parseInt(m.map.style.top);
         MoveMap(e, d);
-        m.mousePosition.x = b.clientX;
-        m.mousePosition.y = b.clientY
+        m.mousePosition.x = clientX;
+        m.mousePosition.y = clientY
     };
 
     /**
@@ -161,15 +167,24 @@ function SpryMap(param) {
      * mousedown event handler
      */
     AddListener(m.viewingBox, "mousedown", function (e) {
+        mousedown(e)
+    });
+    AddListener(m.viewingBox, "touchstart", function (e) {
+        mousedown(e)
+    });
+    var mousedown = function(e){
         m.viewingBox.style.cursor = m.dragCursor;
 
         // Save the current mouse position so we can later find how far the
         // mouse has moved in order to scroll that distance
         m.mousePosition.x = e.clientX;
         m.mousePosition.y = e.clientY;
+        sx = e.clientX;
+        sy = e.clientY;
 
         // Start paying attention to when the mouse moves
         AddListener(document, "mousemove", MouseMove);
+        AddListener(document, "touchmove", MouseMove);
         m.mouseDown = true;
 
         // If the map is set to continue scrolling after the mouse is released,
@@ -187,12 +202,18 @@ function SpryMap(param) {
         }
         
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
-    });
+    }
 
     /**
      * mouseup event handler
      */
-    AddListener(document, "mouseup", function () {
+    AddListener(document, "mouseup", function (e) {
+        mouseup(e)
+    });
+    AddListener(document, "touchend", function (e) {
+        mouseup(e)
+    });
+    var mouseup = function(e){
         if(m.mouseDown) {
             var handler = MouseMove;
             if(document.detachEvent) {
@@ -213,5 +234,5 @@ function SpryMap(param) {
         }
         
         m.viewingBox.style.cursor = m.hoverCursor;
-    });
+    }
 };
