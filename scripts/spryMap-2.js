@@ -38,10 +38,6 @@ var map = new SpryMap({
 });
 */
 function SpryMap(param) {
-    // onmousedown x y
-    var sx = 0;
-    var sy = 0;
-
     /**
      * Name:        MoveMap()
      * Description: Function that moves the map to a given X and Y offset.
@@ -118,13 +114,13 @@ function SpryMap(param) {
      * Description: Function called every time that the mouse moves
      */
     var MouseMove = function (b) {
-        clientX = b.clientX||b.touches[0].clientX;
-        clientY = b.clientY||b.touches[0].clientY;
+        var clientX = b.clientX||b.touches[0].clientX;
+        var clientY = b.clientY||b.touches[0].clientY;
         var e = clientX - m.mousePosition.x + parseInt(m.map.style.left),
             d = clientY - m.mousePosition.y + parseInt(m.map.style.top);
         MoveMap(e, d);
         m.mousePosition.x = clientX;
-        m.mousePosition.y = clientY
+        m.mousePosition.y = clientY;
     };
 
     /**
@@ -179,8 +175,6 @@ function SpryMap(param) {
         // mouse has moved in order to scroll that distance
         m.mousePosition.x = e.clientX;
         m.mousePosition.y = e.clientY;
-        sx = e.clientX;
-        sy = e.clientY;
 
         // Start paying attention to when the mouse moves
         AddListener(document, "mousemove", MouseMove);
@@ -200,8 +194,15 @@ function SpryMap(param) {
             
             m.timerId = setInterval(OnScrollTimer, 20);
         }
-        
-        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            //alert(navigator.userAgent);
+        } else if (/(Android)/i.test(navigator.userAgent)) {
+
+        } else {
+            // remove to fix link clickable on mobile
+            event.preventDefault ? event.preventDefault() : event.returnValue = false;
+        };
     }
 
     /**

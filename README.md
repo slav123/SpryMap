@@ -54,4 +54,27 @@ var map = new SpryMap({
 </map>
 ```
 
-2. Do yo 
+2. The another way to insert clickable on the map(css position)
+```HTML
+<style>
+   #worldMap>a {
+      position:absolute;
+      width:10px;
+      height:10px;
+   }
+</style>
+<div id="worldMap">
+   <img src="map.jpg" alt="A map of the world." />
+
+   <a href="javascript:void(0)" onclick="alert('clickable demo')" style="top:420px;left:550px;background-color: red;">
+
+   </a>
+
+   <a href="javascript:void(0)" onclick="alert('clickable img demo')" style="top:500px;left:320px;">
+      <img src="styles/box.png" alt="" style="width:30px;height:30px;" />
+   </a>
+
+</div>
+```
+
+3. Do yo 

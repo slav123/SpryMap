@@ -13,14 +13,34 @@
                          startY: 200,
                          cssClass: "mappy"});
   }
-  </script> 
-</head> 
+  </script>
+  <style>
+    #worldMap>a {
+      position:absolute;
+      width:10px;
+      height:10px;
+      display:block;
+      z-index:10;
+    }
+  </style>
+</head>
 <body> 
-    <div class="content"> 
-       <h1>Introducing the SpryMap</h1> 
-       <h2>The javascript map script so fast and lightweight that it'll knock your knickers off. Give it a try - click and drag the map below.</h2> 
-       <img id="worldMap" src="map.jpg" alt="A map of the world." />
-       <h3>Note: All credit for creating this wonder of a map image goes to <a href="http://www.lazzmap.com/">Rob Lazzaretti</a>.</h3> 
-    </div> 
+  <div class="content"> 
+    <h1>Introducing the SpryMap</h1> 
+    <h2>The javascript map script so fast and lightweight that it'll knock your knickers off. Give it a try - click and drag the map below.</h2>
+    <div id="worldMap">
+      <img src="map.jpg" alt="A map of the world." />
+
+      <a onclick="alert('clickable demo')" style="top:420px;left:550px;background-color: red;" href="javascript:void(0)">
+      
+      </a>
+
+      <a href="javascript:void(0)" onclick="alert('clickable img demo')" style="top:500px;left:320px;">
+        <img src="styles/box.png" alt="" style="width:30px;height:30px;" />
+      </a>
+
+    </div>
+    <h3>Note: All credit for creating this wonder of a map image goes to <a href="http://www.lazzmap.com/">Rob Lazzaretti</a>.</h3> 
+  </div> 
 </body> 
 </html>
