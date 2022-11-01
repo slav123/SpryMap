@@ -1,16 +1,8 @@
-#SpryMap
+# SpryMap
 
-##Introduction
+## Introduction
 This is fork of original [SpryMap](http://candrews.net/blog/2010/10/introducing-sprymap/) with IE fix. 
 Demo can be seen here: [demo.spidersoft.com.au/SpryMap/index.html](https://demo.spidersoft.com.au/SpryMap/index.html)
-
-##Author && contributors
-
-Made by 2011 Charlie Andrews
-
-- Slawomir Jasinski - fizing mostly IE problems
-- [xloong](https://github.com/xloong) - [mobile support](https://github.com/slav123/SpryMap/pull/7/commits/1d432e553870384a1100d1cf4d93fbf31dd487db)
-- [Matt Holt](https://github.com/mholt) - [customizable cursors](https://github.com/slav123/SpryMap/pull/1/commits/5e38434ce12f4593ee4c43867009b46ee2ca9f31) 
  
 ## Usage
 
@@ -76,5 +68,3 @@ var map = new SpryMap({
 
 </div>
 ```
-
-3. Do yo 
